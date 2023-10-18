@@ -1,4 +1,3 @@
-import Head from "next/head";
 import clientPromise from "../lib/mongodb";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 
@@ -20,12 +19,13 @@ export const getServerSideProps: GetServerSideProps<
     const db = client.db("sample_mflix");
 
     const raw = await db.collection("movies").find({}).limit(2).toArray();
-    const movie = JSON.stringify(raw);
-    const parsedMovie = JSON.parse(movie);
+    console.log("Found documents =>", raw);
+    // const movie = JSON.stringify(raw);
+    // const parsedMovie = JSON.parse(movie);
     return {
       props: {
         isConnected: true,
-        movies: parsedMovie,
+        movies: JSON.parse(JSON.stringify(raw)),
       },
     };
   } catch (e) {
@@ -51,7 +51,6 @@ export default function Home({
   return (
     <div className="container">
       <main>
-        <h2>Hi there!</h2>
         {movies.length > 0 ? (
           <>
             <h2>Movies</h2>
@@ -64,17 +63,6 @@ export default function Home({
           </h2>
         )}
       </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
     </div>
   );
 }
