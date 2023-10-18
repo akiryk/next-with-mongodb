@@ -18,5 +18,23 @@ export const resolvers = {
       await newStudent.save();
       return newStudent;
     },
+    update: async (parent, args) => {
+      const { id } = args;
+      const updatedStudent = await Student.findByIdAndUpdate(id, args, {
+        new: true,
+      });
+      if (!updatedStudent) {
+        throw new Error(`Student with ID ${id} not found`);
+      }
+      return updatedStudent;
+    },
+    delete: async (parent, args) => {
+      const { id } = args;
+      const deletedStudent = await Student.findByIdAndDelete(id);
+      if (!deletedStudent) {
+        throw new Error(`Student with id ${id} not found`);
+      }
+      return deletedStudent;
+    },
   },
 };
