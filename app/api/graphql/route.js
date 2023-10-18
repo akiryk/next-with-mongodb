@@ -16,7 +16,10 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log(`Db Connected`);
+    console.log(`
+      🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
+           S U C C E S S !
+      🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀`);
   })
   .catch((err) => {
     console.log(err.message);
