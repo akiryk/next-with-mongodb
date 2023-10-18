@@ -32,12 +32,13 @@ export default async function Home() {
     return null;
   }
 
+  console.log(data);
   return (
     <div className="container">
       <main>
         <ul>
           {data.students.map((student: Student) => (
-            <li>
+            <li key={student.id}>
               {student.firstName} {student.lastName}: {student.id}
             </li>
           ))}
